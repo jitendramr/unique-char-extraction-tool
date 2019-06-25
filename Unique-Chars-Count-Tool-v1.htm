@@ -1,0 +1,76 @@
+﻿<html>
+<head>
+<title>Unique Character Extraction Tool v1</title>
+<style>
+body,td,input{font-family:arial;font-size:100%;color:#000}
+body{padding:10px}
+#heading{font-size:125%;font-weight:bold}
+#description{font-size:100%;font-weight:bold}
+hr{height:1px;color:#efefef}
+li{font-size:90%}
+td{font-size:90%;font-weight:bold;width:33%}
+#output{padding:4px;font-size:120%;font-weight:bold;border:0px;background-color:beige;width:100%;height:120%}
+#output_msg{border:0px}
+#input{padding:4px;font-size:120%;width:100%;height:120%}
+</style>
+<script language="javascript">
+function add_line_breaks(){
+	var input=document.forms[0].elements[1].value;
+	var output=document.forms[0].elements[5];
+	var output_msg=document.forms[0].elements[0];
+	output_msg.value="Added line breaks.";
+	output.value="";
+	for (i=0;i<input.length;i++){
+		output.value += input.charAt(i) + "\n";
+	}
+	output.select();	
+}
+
+function remove_line_breaks(){
+	var input=document.forms[0].elements[1].value;
+	var output=document.forms[0].elements[5];
+	var output_msg=document.forms[0].elements[0];
+	output_msg.value="Removed line breaks.";	
+	output.value="";
+	//output.value=input.replace(/\n/g,''); //ff only
+	output.value=input.replace(/\s/g,'').replace(/  ,/g,''); //ie, op, ff
+	output.select();	
+}
+
+function init(){
+ document.all.elementsById("output_msg").display="hidden";
+}
+</script>
+</head>
+<body onload="init()" margin="0">
+	<div>
+		<p id="heading">Unique Character Extraction Tool v1</p>
+		<p id="description">This tool helps identify the set of unique characters in a given chunk of text. You can also use this tool simply to add or remove new line in text.</p>
+	</div>
+	<hr/>
+	<ol>
+		<li>Paste the chunk of text in the box on left and Add Line Breaks. This will add line breaks after each characater and show it on the right side box (auto-selected for you to copy).<br/>
+		<li>Copy this text and paste it in an Excel spreadsheet. Excel will paste each characater in a separate row.<br/>
+		<li>In Excel, select the whole column of cells and use Remove Duplicates feature. This will show you only unique characters and remove duplicate characaters.
+	</ol>
+	<br/>
+	<form>
+	<table border="0">
+		<tr>
+			<td colspan="2">Paste the chunk of text below then do desired operation.<br/><br/></td>
+			<td><input type="text" readonly value="" name="output_msg" id="output_msg"><br/><br/></td>
+		</tr>
+		<tr>
+			<td valign="top"><textarea rows="15" id="input"></textarea></td>
+			<td valign="top" width="200" style="width:15%"><center>
+				<br/><br/><input type="button" value="Add Line Breaks" onclick="add_line_breaks()">
+				<br/><br/><input type="button" value="Remove Line Breaks" onclick="remove_line_breaks()">
+				<br/><br/><input type="reset" value="Clear All"></center>
+			<td valign="top" rowspan="2"><textarea rows="15" readonly id="output"  scroll="auto"></textarea></td>
+		</tr>
+	</table>
+	</form>
+	<br/><br/><br/>
+	<hr/>
+	<div style=""><p style="font-size:80%;color:#aaaaaa">Unique Character Extraction Tool v1 | <script>document.write("Last Updated " + document.lastModified)</script></p></div>
+</body>
